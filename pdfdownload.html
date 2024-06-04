@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Web Page as PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <h1>Download Web Page as PDF</h1>
+
+    <button onclick="generatePDF()">Download PDF</button>
+
+    <script>
+        function generatePDF() {
+            const doc = new jsPDF();
+            const html = document.documentElement;
+
+            // Create a canvas element to capture the entire page
+            html2canvas(html).then(canvas => {
+                const imageData = canvas.toDataURL('image/png');
+                const imgWidth = 210; // A4 width in mm
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+
+                doc.addImage(imageData, 'PNG', 0, 0, imgWidth, imgHeight);
+                doc.save('webpage.pdf');
+            });
+        }
+    </script>
+
+</body>
+</html
