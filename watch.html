@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartwatch Interface</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #544e4e;
+        }
+        .watch {
+            position: relative;
+            width: 275px;
+            height: 275px;
+            border-radius: 50%;
+            background-color: #9d00ff;
+            border: 5px solid #ff4400;
+        }
+        .watch .inner-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background-color: #141313;
+        }
+        .watch .battery, .watch .steps, .watch .heart-rate, .watch .temperature, .watch .date, .watch .time, .watch .weather {
+            position: absolute;
+            color: #66ff00;
+            text-align: center;
+        }
+        .watch .battery {
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .watch .steps {
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .watch .heart-rate {
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .watch .temperature {
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .watch .date {
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+        }
+        .watch .time {
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+        }
+        .watch .weather {
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .watch .icon {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="watch">
+        <div class="inner-circle"></div>
+        <div class="battery"><span class="icon">🔋</span>76%</div>
+        <div class="heart-rate"><span class="icon">❤️</span>88</div>
+        <div class="date" id="date">WED 27</div>
+        <div class="time" id="time">10:45:00</div>
+        <div class="weather">
+            <div>36°</div>
+            <div>3%</div>
+        </div>
+    </div>
+    <script>
+        function updateTimeAndDate() {
+            const now = new Date();
+            const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+            const day = days[now.getDay()];
+            const date = now.getDate();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('date').textContent = `${day} ${date}`;
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateTimeAndDate, 1000);
+        updateTimeAndDate(); // Initial call to set date and time immediately
+    </script>
+</body>
+</html>
