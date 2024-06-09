@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Web Page as PDF</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <title>Editable Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Your CSS styles here */
+    </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Your resume content here -->
+    </div>
 
-    <h1>Download Web Page as PDF</h1>
+    <!-- Button to generate PDF -->
+    <button onclick="generatePDF()">Generate PDF</button>
 
-    <button onclick="generatePDF()">Download PDF</button>
+    <!-- Your existing JavaScript code here -->
 
     <script>
         function generatePDF() {
-            const doc = new jsPDF();
-            const html = document.documentElement;
+            // Get the container element
+            const container = document.querySelector('.container');
 
-            // Create a canvas element to capture the entire page
-            html2canvas(html).then(canvas => {
-                const imageData = canvas.toDataURL('image/png');
-                const imgWidth = 210; // A4 width in mm
-                const imgHeight = canvas.height * imgWidth / canvas.width;
-
-                doc.addImage(imageData, 'PNG', 0, 0, imgWidth, imgHeight);
-                doc.save('webpage.pdf');
-            });
+            // Use html2pdf library to generate PDF from HTML content
+            html2pdf().from(container).save('editable_resume.pdf');
         }
     </script>
 
+    <!-- Include the html2pdf library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 </body>
-</html
+</html>
